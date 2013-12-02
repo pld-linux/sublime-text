@@ -11,6 +11,8 @@ Source1:	http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20%{version}%20x64.ta
 # NoSource1-md5:	699cd26d7fe0bada29eb1b2cd7b50e4b
 NoSource:	1
 URL:		http://www.sublimetext.com/
+Requires:	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -40,8 +42,20 @@ ln -s %{_appdir}/%{name} $RPM_BUILD_ROOT%{_bindir}/sublime
 %py_ocomp $RPM_BUILD_ROOT%{_appdir}
 %py_comp $RPM_BUILD_ROOT%{_appdir}
 
+for dir in Icon/*; do
+	size=${dir#Icon/}
+	install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/$size/apps
+	cp -p $dir/sublime_text.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/$size/apps
+done
+
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%update_icon_cache hicolor
+
+%postun
+%update_icon_cache hicolor
 
 %files
 %defattr(644,root,root,755)
@@ -55,3 +69,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_appdir}/Pristine?Packages
 %dir %{_appdir}/lib
 %{_appdir}/lib/python26.zip
+%{_iconsdir}/hicolor/*/apps/sublime_text.png
