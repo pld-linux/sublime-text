@@ -1,7 +1,7 @@
 Summary:	Sublime Text is a sophisticated text editor for code, html and prose
 Name:		sublime-text
 Version:	2.0.2
-Release:	0.1
+Release:	0.2
 License:	Copyright Sublime HQ Pty Ltd
 Group:		Applications/Editors
 Source0:	http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20%{version}.tar.bz2
@@ -39,7 +39,7 @@ mv "Sublime Text 2"/Icon .
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_appdir},%{_bindir}}
 cp -a "Sublime Text 2"/* $RPM_BUILD_ROOT%{_appdir}
-ln -s %{_appdir}/%{name} $RPM_BUILD_ROOT%{_bindir}/sublime
+ln -s %{_appdir}/sublime_text $RPM_BUILD_ROOT%{_bindir}/sublime
 
 %py_ocomp $RPM_BUILD_ROOT%{_appdir}
 %py_comp $RPM_BUILD_ROOT%{_appdir}
