@@ -10,7 +10,9 @@ NoSource:	0
 Source1:	http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20%{version}%20x64.tar.bz2
 # NoSource1-md5:	699cd26d7fe0bada29eb1b2cd7b50e4b
 NoSource:	1
+Source2:	sublime_text.desktop
 URL:		http://www.sublimetext.com/
+Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 ExclusiveArch:	%{ix86} %{x8664}
@@ -42,6 +44,8 @@ ln -s %{_appdir}/%{name} $RPM_BUILD_ROOT%{_bindir}/sublime
 %py_ocomp $RPM_BUILD_ROOT%{_appdir}
 %py_comp $RPM_BUILD_ROOT%{_appdir}
 
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 for dir in Icon/*; do
 	size=${dir#Icon/}
 	install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/$size/apps
@@ -52,9 +56,11 @@ done
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%update_desktop_database
 %update_icon_cache hicolor
 
 %postun
+%update_desktop_database
 %update_icon_cache hicolor
 
 %files
@@ -69,4 +75,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_appdir}/Pristine?Packages
 %dir %{_appdir}/lib
 %{_appdir}/lib/python26.zip
+%{_desktopdir}/sublime_text.desktop
 %{_iconsdir}/hicolor/*/apps/sublime_text.png

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Sublime2
+GenericName=Sublime 2 Text
+Comment=Text editor
+Exec=sublime
+Icon=sublime_text
+Terminal=false
+Type=Application
+Categories=Development;TextEditor;
+StartupNotify=true
