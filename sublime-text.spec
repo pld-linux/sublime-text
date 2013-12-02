@@ -37,6 +37,9 @@ install -d $RPM_BUILD_ROOT{%{_appdir},%{_bindir}}
 cp -a "Sublime Text 2"/* $RPM_BUILD_ROOT%{_appdir}
 ln -s %{_appdir}/%{name} $RPM_BUILD_ROOT%{_bindir}/sublime
 
+%py_ocomp $RPM_BUILD_ROOT%{_appdir}
+%py_comp $RPM_BUILD_ROOT%{_appdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -46,7 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/sublime
 %attr(755,root,root) %{_appdir}/sublime_text
 %{_appdir}/PackageSetup.py
+%{_appdir}/PackageSetup.py[co]
 %{_appdir}/sublime_plugin.py
+%{_appdir}/sublime_plugin.py[co]
 %{_appdir}/Pristine?Packages
 %dir %{_appdir}/lib
 %{_appdir}/lib/python26.zip
